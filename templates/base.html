@@ -1,0 +1,72 @@
+<html>
+<head>
+    <title>Test Flask Application</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-8">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ url_for('home') }}">Flask app</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-8">
+          <ul class="nav navbar-nav">
+            <li {% if page == 'home' %}class="active"{% endif %}><a href="{{ url_for('home') }}">Home</a></li>
+            {% if 'auth_user_id' in session %}
+                <li {% if page == 'author' %}class="active"{% endif %}><a href="{{ url_for('author.all_authors') }}">Author</a></li>
+                <li {% if page == 'book' %}class="active"{% endif %}><a href="{{ url_for('book.all_books') }}">Book</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+                <li class="right" data-toggle="modal" data-target="#login">
+                    <a href="javascript:void(0)">Login</a>
+                </li>
+            {% endif %}
+          </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+
+    <!-- LOGIN BLOCK -->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="{{ url_for('login') }}" role="form">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Login</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="form-group">
+                    <label for="exampleInputLogin">Login</label>
+                    <input type="text" name="login" class="form-control" id="exampleInputLogin" placeholder="Enter login">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword">Password</label>
+                    <input name="password" type="password" class="form-control" id="exampleInputPassword" placeholder="Enter password">
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Login</button>
+              </div>
+            </form>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+    <!-- CONTENT -->
+    {% block content %}{% endblock %}
+
+    <!-- JAVASCRIPT -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</body>
+</html>

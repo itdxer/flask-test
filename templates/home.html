@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+    <div style="width: 700px; margin: 0 auto;">
+        <h3>Search Book</h3>
+        <form role="form" method="get" action="{{ url_for('search_book') }}">
+          <div class="form-group">
+            <label for="exampleInputBook">Book name</label>
+            <input type="text" name="book" class="form-control" id="exampleInputBook">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputAuthor">Author name</label>
+            <input type="text" name="author" class="form-control" id="exampleInputAuthor">
+          </div>
+          <button type="submit" class="btn btn-default">Search</button>
+        </form>
+    </div>
+{% endblock %}

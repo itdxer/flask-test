@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+    <form method="post" action="" role="form" style="margin-left: 20px;">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label for="exampleInputLogin">Name</label>
+            {{ form.name }}
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+{% endblock %}

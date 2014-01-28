@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <h3 style="margin-left: 10px;">Books:</h3>
+    <ul>
+        {% for book in books %}
+            <li>
+                <b>{{ book.name }}</b>
+                <div>
+                    {% for author in book.authors %}
+                        <i>{% if not loop.first %}, {% endif %}{{ author.name }}</i>
+                    {% endfor %}
+                </div>
+            </li><br>
+        {% endfor %}
+    </ul>
+{% endblock %}
